@@ -8,4 +8,8 @@ while ($row = mysqli_fetch_array($result)) {
     $data[] = $row;
 }
 
-echo json_encode($data);
+$dist =  json_encode($data);
+
+echo $dist;
+
+

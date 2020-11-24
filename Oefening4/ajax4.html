@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Hier wordt alle instellingen ingesteld -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,11 +14,11 @@
   <body>
     <h1>TODO</h1>
     <div id="dist"></div>
-    <script>
+    <script >
       $(document).ready(function () {
-        $.getJSON("ajax4.php").done(function (data) {
+        $.getJSON("ajax4.php", function (data) {
           var output = "<ul>";
-          for (var i in data) {
+            for (var i in data) {
             output += `<li>${data[i].title}<br>`;
             if (data[i].complete == 1) {
               output += "gesloten";
@@ -28,7 +29,6 @@
           }
           output += "</ul>";
           $("#dist").html(output);
-          $(".test").html(output);
         });
       });
     </script>
