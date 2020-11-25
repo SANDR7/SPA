@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
+    <title>Oefening 7</title>
+  </head>
+  <body>
+    <div class="container" id="cont-1">
+      <h1>Dit is het hoofdscherm</h1>
+      <p>
+        <button type="button" class="btn" id="switchto2">Naar 2e scherm</button>
+      </p>
+    </div>
+    <div class="container d-none" id="cont-2">
+      <h1>Dit is het tweede scherm</h1>
+      <p>
+        <button type="button" class="btn" id="switchto1">Terug</button>
+      </p>
+    </div>
+    <script>
+      $(document).on("click", "#switchto2", function () {
+        $("#cont-1").removeClass("d-block").addClass("d-none");
+        $("#cont-2").removeClass("d-none").addClass("d-block");
+      });
+      $(document).on("click", "#switchto1", function () {
+        $("#cont-1").removeClass("d-none").addClass("d-block");
+        $("#cont-2").removeClass("d-block").addClass("d-none");
+      });
+    </script>
+  </body>
+</html>
