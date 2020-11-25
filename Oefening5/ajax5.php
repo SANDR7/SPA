@@ -5,3 +5,10 @@ $invoer = htmlentities(
 );
 
 $result = mysqli_query($mysqli, "INSERT INTO `todo` (`title`) VALUES ('{$invoer}')");
+
+
+if ($result) {
+    echo "OK";
+} else {
+    echo "FOUT";
+}
