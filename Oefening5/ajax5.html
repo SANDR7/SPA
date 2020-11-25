@@ -12,10 +12,10 @@
   </head>
 
   <body>
-      <input type="text" id="invoer">
-      <button id="knop">Klik mij</button>
-      
-      <div id="dist"></div>
+    <input type="text" id="invoer" />
+    <button id="knop">Klik mij</button>
+
+    <div id="dist"></div>
     <script>
       $(document).ready(function () {
         $(`#knop`).click(function () {
@@ -23,7 +23,7 @@
           $.ajax({
             url: `ajax5.php`,
             method: `POST`,
-            data: { 'invoer': invoer },
+            data: { invoer: invoer },
           }).done(function (data) {
             if (data == "OK") {
               $(`#dist`).text(`Gelukt!`);
