@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <title>Ajax SPA | 84231</title>
-</head>
-<body style="margin: 10em;">
-    <table id="Tabel">
-
-    </table>
-    <div id="bewerken"></div>
-    <div id="verwijderen"></div>
+  </head>
+  <body style="margin: 3em">
+    <main id="Dist"></main>
     <script>
-         $(document).ready(function() {
-            $.ajax({
-                url: "content.php",
-                dataType: "json",
-            })
+      $(document).ready(function () {
+        $.getJSON("content.todo.php", function (data) {
+          //   var output = "<ul>";
+          var Output = `<div style="display: grid; grid-template-columns: repeat(4, 300px);">`;
+          for (var i in data) {
+            Output += `<div>`;
+            Output += `<b>${data[i].title}</b>`;
+            if (data[i].complete == 1) {
+              Output += `<div>gesloten</div>`;
+            } else {
+                Output += `<div>Open</div>`;
+            }
+            Output += `</div>`;
+          }
+          Output += "</div>";
+          $("#Dist").html(Output);
         });
+      });
     </script>
-</body>
+  </body>
 </html>
