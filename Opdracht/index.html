@@ -14,10 +14,60 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Ajax SPA | 84231</title>
   </head>
   <body style="margin: 3em">
+    <div
+      class="modal fade"
+      id="modal1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal1-label"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal1-label">Voeg je to-do in</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <input class="modal-body" type="text" id="invoer" />
+          <b id="isFinished"></b>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Sluiten
+            </button>
+            <button type="button" id="knop" class="btn btn-primary">
+              Opslaan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#modal1"
+    >
+      Open modal 1
+    </button>
     <main id="Dist"></main>
+    <br />
+    <br />
+
     <script>
       $(document).ready(function () {
         $.getJSON("content.todo.php", function (data) {
@@ -29,14 +79,31 @@
             if (data[i].complete == 1) {
               Output += `<div>gesloten</div>`;
             } else {
-                Output += `<div>Open</div>`;
+              Output += `<div>Open</div>`;
             }
+            Output += `<button id="Delete">Delete</button>`;
             Output += `</div>`;
           }
           Output += "</div>";
           $("#Dist").html(Output);
         });
+      // Todo uitvoeren
+        $(`#knop`).click(function () {
+          var invoer = $(`#invoer`).val();
+          $.ajax({
+            url: `Create/create.todo.php`,
+            method: `POST`,
+            data: { invoer: invoer },
+          }).done(function (data) {
+            if (data == "OK") {
+              $(`#isFinished`).text(`Gelukt!`);
+            } else {
+              $(`#isFinished`).text(`Er ging iets fout!`);
+            }
+          });
+        });
       });
+
     </script>
   </body>
 </html>
