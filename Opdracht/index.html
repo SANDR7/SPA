@@ -16,94 +16,21 @@
     />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Ajax SPA | 84231</title>
-  </head>
-  <body style="margin: 3em">
-    <div
-      class="modal fade"
-      id="modal1"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modal1-label"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modal1-label">Voeg je to-do in</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <input class="modal-body" type="text" id="invoer" />
-          <b id="isFinished"></b>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Sluiten
-            </button>
-            <button type="button" id="knop" class="btn btn-primary">
-              Opslaan
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      data-toggle="modal"
-      data-target="#modal1"
-    >
-      Open modal 1
-    </button>
-    <main id="Dist"></main>
-    <br />
-    <br />
-
+    <script src="./logic.js"></script>
     <script>
       $(document).ready(function () {
-        $.getJSON("content.todo.php", function (data) {
-          //   var output = "<ul>";
-          var Output = `<div style="display: grid; grid-template-columns: repeat(4, 300px);">`;
-          for (var i in data) {
-            Output += `<div>`;
-            Output += `<b>${data[i].title}</b>`;
-            if (data[i].complete == 1) {
-              Output += `<div>gesloten</div>`;
-            } else {
-              Output += `<div>Open</div>`;
-            }
-            Output += `<button id="Delete">Delete</button>`;
-            Output += `</div>`;
-          }
-          Output += "</div>";
-          $("#Dist").html(Output);
-        });
-      // Todo uitvoeren
-        $(`#knop`).click(function () {
-          var invoer = $(`#invoer`).val();
-          $.ajax({
-            url: `Create/create.todo.php`,
-            method: `POST`,
-            data: { invoer: invoer },
-          }).done(function (data) {
-            if (data == "OK") {
-              $(`#isFinished`).text(`Gelukt!`);
-            } else {
-              $(`#isFinished`).text(`Er ging iets fout!`);
-            }
-          });
+        showTodos();
+        $("#addButton").click(function (e) {
+          e.preventDefault();
+          addTodo();
         });
       });
-
     </script>
+  </head>
+  <body style="margin: 3em">
+    <input type="text" id="invoer" />
+    <button id="addButton">Klik mij</button>
+    <div class="dist"></div>
+    <main id="Dist"></main>
   </body>
 </html>
