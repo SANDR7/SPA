@@ -26,15 +26,27 @@
           for (var i in data) {
             Output += `<div>`;
             Output += `<b>${data[i].title}</b>`;
+            Output += `<div>`;
+            Output += `<span>Status:</span>`;
             if (data[i].complete == 1) {
               Output += `<div>gesloten</div>`;
             } else {
-                Output += `<div>Open</div>`;
+              Output += `<div>Open</div>`;
             }
+            Output += `<a href="#" id="deleteTodo">Delete</a>`;
+            Output += `<button id="knop">edit</button>`;
+            Output += `</div>`;
             Output += `</div>`;
           }
           Output += "</div>";
+          Output += `<input type="test" id="invoer">`;
           $("#Dist").html(Output);
+        });
+        var invoer = $(`#invoer`).val();
+
+        $("#deleteTodo").click(function (e) { 
+          e.preventDefault();
+          console.log(invoer);
         });
       });
     </script>
