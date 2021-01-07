@@ -27,13 +27,18 @@
   </head>
   <style>
     body {
-      /* background-image: url('https://www.kurkspecialist.nl/data/upload/Shop/images/kurk-achtergrond-19.jpg'); */
+      background-image: url("https://www.kurkspecialist.nl/data/upload/Shop/images/kurk-achtergrond-19.jpg");
       background-repeat: no-repeat;
       background-size: 100%;
     }
-    .col-2 {
-      background-color: #f5e85b !important;
+    .col-3 {
+      background-color: #f5e85b ;
       height: 200px !important;
+      box-shadow: 0 -2.9px 2.4px rgba(0, 0, 0, 0.108),
+        0 -1.6px 3.8px rgba(0, 0, 0, 0.15), 0 4.9px 5.8px rgba(0, 0, 0, 0.171),
+        0 18.4px 13.3px rgba(0, 0, 0, 0.181), 0 43.1px 36px rgba(0, 0, 0, 0.185),
+        0 100px 80px rgba(0, 0, 0, 0.19);
+      background-image: url("http://api.thumbr.it/whitenoise-361x370.png?background=f5e85b&noise=5c5c5c&density=13&opacity=20") !important;
     }
   </style>
   <body style="margin: 3em">
@@ -50,42 +55,5 @@
       <div class="dist"></div>
       <div id="Dist" class="container"></div>
     </main>
-    <div
-      class="modal fade"
-      id="modal1"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="modal1-label"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modal1-label">Mijn titel</h5>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="modal"
-              aria-label="Close"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <input type="text" />
-          <button id="addButton">Todo Bewerk</button><br />
-          <div class="modal-body">Mijn inhoud</div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Sluiten
-            </button>
-            <button type="button" class="btn btn-primary">Opslaan</button>
-          </div>
-        </div>
-      </div>
-    </div>
   </body>
 </html>

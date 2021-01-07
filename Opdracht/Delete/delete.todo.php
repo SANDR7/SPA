@@ -1,10 +1,10 @@
 <?php require "../config.inc.php";
-$invoer = htmlentities(
-    $_POST["invoer"],
+$ID = htmlentities(
+    $_GET["id"],
     ENT_QUOTES
 );
 
-$result = mysqli_query($mysqli, "INSERT INTO `todo` (`title`) VALUES ('{$invoer}')");
+$result = mysqli_query($mysqli, "DELETE FROM `todo` WHERE `id` = $ID");
 
 
 if ($result) {
