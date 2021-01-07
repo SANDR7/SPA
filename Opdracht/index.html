@@ -25,38 +25,55 @@
       });
     </script>
   </head>
+  <style>
+    body {
+      /* background-image: url('https://www.kurkspecialist.nl/data/upload/Shop/images/kurk-achtergrond-19.jpg'); */
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+    .col-2 {
+      background-color: #f5e85b !important;
+      height: 200px !important;
+    }
+  </style>
   <body style="margin: 3em">
-    <input type="text" id="invoer" />
-    <button id="addButton">Todo Toevoegen</button><br>
-    <span id="isFinished"></span>
-    <hr>
-    <div class="dist"></div>
-    <main id="Dist"></main>
-    
+    <div class="container d-flex">
+      <input type="text" id="invoer" class="form-control w-75" />
+      <button id="addButton" class="btn btn-primary ml-2">Todo Toevoegen</button
+      ><br />
+    </div>
+    <div class="container">
+      <span id="isFinished"></span>
+    </div>
+    <hr />
+    <main>
+      <div class="dist"></div>
+      <div id="Dist" class="container"></div>
+    </main>
     <div
-    class="modal fade"
-    id="modal1"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="modal1-label"
-    aria-hidden="true"
+      class="modal fade"
+      id="modal1"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="modal1-label"
+      aria-hidden="true"
     >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal1-label">Mijn titel</h5>
-          <button
-          type="button"
-          class="close"
-          data-dismiss="modal"
-          aria-label="Close"
-          >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <input type="text" />
-      <button id="addButton">Todo Bewerk</button><br>
-      <div class="modal-body">Mijn inhoud</div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal1-label">Mijn titel</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <input type="text" />
+          <button id="addButton">Todo Bewerk</button><br />
+          <div class="modal-body">Mijn inhoud</div>
           <div class="modal-footer">
             <button
               type="button"
