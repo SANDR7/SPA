@@ -3,17 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
       integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
       crossorigin="anonymous"
     ></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Ajax SPA | 84231</title>
     <script src="./logic.js"></script>
@@ -29,8 +27,48 @@
   </head>
   <body style="margin: 3em">
     <input type="text" id="invoer" />
-    <button id="addButton">Klik mij</button>
+    <button id="addButton">Todo Toevoegen</button><br>
+    <span id="isFinished"></span>
+    <hr>
     <div class="dist"></div>
     <main id="Dist"></main>
+    
+    <div
+    class="modal fade"
+    id="modal1"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="modal1-label"
+    aria-hidden="true"
+    >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal1-label">Mijn titel</h5>
+          <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <input type="text" />
+      <button id="addButton">Todo Bewerk</button><br>
+      <div class="modal-body">Mijn inhoud</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Sluiten
+            </button>
+            <button type="button" class="btn btn-primary">Opslaan</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

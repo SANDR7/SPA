@@ -1,19 +1,21 @@
-
-const JSONSource = "http://localhost/SPA/Vue-Todo/process.todo.php";
+const JSONSource = "http://localhost/SPA/Vue-Todo/SPA/Vue-Todo/process.todo.php";
+// const JSONSource =
+// "http://localhost/School/Front/Spa//Vue-Todo/process.todo.php";
+// const JSONSource = "https://84231.ict-lab.nl/SPA/Vue/process.todo.php";
 
 var app = new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     errorMsg: "",
     successMsg: "",
     showAddModal: false,
     showEditModal: false,
     showDeleteModal: false,
-
+    extendedCost: 0,
     todos: [],
     newTodo: {
       name: "",
-      finished: ""
+      finished: "",
     },
     currentTodo: {},
   },
@@ -21,6 +23,10 @@ var app = new Vue({
     this.getAllTodos();
   },
   methods: {
+    _onInputExtendedCost: function ($event) {
+      this.extendedCost = parseInt($event.target.value);
+      // Go update other inputs here
+    },
     getAllTodos() {
       axios.get(`${JSONSource}?action=read`).then(function (response) {
         if (response.data.error) {
@@ -28,52 +34,59 @@ var app = new Vue({
         } else {
           app.todos = response.data.todos;
         }
-      })
+      });
     },
     addTodo() {
       const formData = app.toFormData(app.newTodo);
-      axios.post(`${JSONSource}?action=create`, formData).then(function (response) {
-        app.newTodo = { title: "", complete: "" };
-        if (response.data.error) {
-          app.errorMsg = response.data.message;
-        } else {
-          app.successMsg = response.data.message;
-          app.getAllTodos();
-        }
-      })
-
+      axios
+        .post(`${JSONSource}?action=create`, formData)
+        .then(function (response) {
+          app.newTodo = { title: "", complete: "" };
+          if (response.data.error) {
+            app.errorMsg = response.data.message;
+          } else {
+            app.successMsg = response.data.message;
+            app.getAllTodos();
+          }
+        });
     },
     updateTodo() {
       var formData = app.toFormData(app.currentTodo);
-      axios.post(`${JSONSource}?action=update`, formData).then(function (response) {
-        app.currentTodo = {};
-        if (response.data.error) {
-          app.errorMsg = response.data.message;
-        } else {
-          app.successMsg = response.data.message;
-          app.getAllTodos();
-        }
-      })
-
+      axios
+        .post(`${JSONSource}?action=update`, formData)
+        .then(function (response) {
+          if (app.currentTodo.title === "") {
+            return app.deleteTodo();
+          }
+          app.currentTodo = {};
+          if (response.data.error) {
+            app.errorMsg = response.data.message;
+          } else {
+            app.successMsg = response.data.message;
+            app.getAllTodos();
+          }
+        });
     },
     deleteTodo() {
       var formData = app.toFormData(app.currentTodo);
-      axios.post(`${JSONSource}?action=delete`, formData).then(function (response) {
-        app.currentTodo = {};
-        if (response.data.error) {
-          app.errorMsg = response.data.message;
-        } else {
-          app.successMsg = response.data.message;
-          app.getAllTodos();
-        }
-      })
-
+      axios
+        .post(`${JSONSource}?action=delete`, formData)
+        .then(function (response) {
+          app.currentTodo = {};
+          if (response.data.error) {
+            app.errorMsg = response.data.message;
+          } else {
+            app.successMsg = response.data.message;
+            app.getAllTodos();
+          }
+        });
     },
     toFormData(obj) {
       var fd = new FormData();
       for (var i in obj) {
         fd.append(i, obj[i]);
-      } return fd;
+      }
+      return fd;
     },
     selectTodo(todo) {
       app.currentTodo = todo;
@@ -81,6 +94,6 @@ var app = new Vue({
     clearMsg() {
       app.errorMsg = "";
       app.successMsg = "";
-    }
-  }
+    },
+  },
 });

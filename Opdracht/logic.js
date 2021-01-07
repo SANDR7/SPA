@@ -10,6 +10,12 @@ const showTodos = () => {
             } else {
                 Output += `<div>Open</div>`;
             }
+            Output += `<div>`;
+            Output += `<button onclick="openEditModel()"       type="button"
+      class="btn btn-primary"
+      data-toggle="modal"
+      data-target="#modal1">Edit</button>`;
+            Output += `</div>`;
             Output += `</li>`;
         }
         Output += "</ul>";
@@ -32,6 +38,9 @@ const addTodo = () => {
             $(`#isFinished`).text(`Er ging iets fout!`);
         }
     });
+}
+const openEditModel = () => {
+    $('#temp').show();
 }
 
 // const deleteTodo = () => {

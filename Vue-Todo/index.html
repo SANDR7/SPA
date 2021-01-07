@@ -3,18 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VueTodo</title>
+    <title>Vue | SPA - 84231</title>
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
       crossorigin="anonymous"
     />
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
     <style>
       #overlay {
         position: fixed;
@@ -23,6 +18,20 @@
         left: 0;
         right: 0;
         background: #00000063;
+      }
+      .Finished {
+        font-weight: bold;
+        color: #ff5964;
+      }
+      .notFinished {
+        font-weight: normal;
+        color: #51b65b;
+      }
+      input[type="checkbox"] {
+        /* appearance: none; */
+      }
+      label {
+        cursor: pointer;
       }
     </style>
   </head>
@@ -33,7 +42,7 @@
         <div class="row bg-dark">
           <div class="col-lg-12">
             <h1 class="text-center text-light py-4 h4">
-              CRUD Application Using Vue.js, PHP, & MySqli
+              84231 - Sander || Single Page App
             </h1>
           </div>
         </div>
@@ -42,44 +51,63 @@
       <div class="container">
         <div class="row mt-3">
           <div class="col-lg-6">
-            <h3 class="text-info">Todos List</h3>
+            <h3 class="text-primary">Todo Lijst</h3>
           </div>
           <div class="col-lg-6">
-            <button class="btn btn-info float-right" @click="showAddModal=true">
-              <i class="far fa-clipboard-check"></i>&nbsp;&nbsp; Add todo
+            <button
+              class="btn btn-primary float-right"
+              @click="showAddModal=true"
+            >
+              <i class="far fa-clipboard-check"></i>&nbsp;&nbsp; Todo Toevoegen
             </button>
           </div>
         </div>
         <hr class="bg-info" />
+        <!-- Wanneer er een actie wordt genomen -->
         <div class="alert alert-danger" v-if="errorMsg">{{errorMsg}}</div>
         <div class="alert alert-success" v-if="successMsg">{{successMsg}}</div>
-        <!-- Displaying Recocds -->
+        <!-- gegevens weergeven -->
+        <!-- :attribute beketen dat vue.js de data meegeeft -->
         <div class="row">
           <div class="col-lg-12">
             <table class="table table-bordered table-striped">
               <thead>
                 <tr class="text-center bg-info text-light">
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>finished</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th class="text-left">Naam</th>
+                  <th>Status</th>
+                  <th>Bewerken</th>
+                  <th>Verwijderen</th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="text-center" v-for="todo in todos">
                   <td>{{todo.id}}</td>
-                  <td>{{todo.title}}</td>
-                  <td>{{todo.complete}}</td>
+                  <td class="text-left">{{todo.title}}</td>
+                  <!-- inline if else statement -->
+                  <td :class="todo.complete == 0 ? 'Finished' : 'notFinished'">
+                    {{todo.complete == 1 ? 'Gesloten' : 'Open'}}
+                  </td>
+                  <!-- <td>
+                    <input
+                      type="checkbox"
+                      :id="todo.id"
+                      :value="todo.complete"
+                      @click="updateCompleted($event, todo.id)"
+                    />
+                  </td> -->
+
+                  <!-- bewerk knop | @click betekent onclick -->
                   <td class="col-md-1">
                     <a
                       href="#"
-                      class="text-success"
-                      @click="showEditModal=true; selectTodo(todo);"
+                      class="text-primary"
+                      @click="showEditModal=true;  selectTodo(todo);"
                     >
                       <i class="far fa-edit"></i>
                     </a>
                   </td>
+                  <!-- verwijder knop | @click betekent onclick  -->
                   <td class="col-md-1">
                     <a
                       href="#"
@@ -106,7 +134,8 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <div class="modal-title">Add New Todo</div>
+              <div class="modal-title">Maak nieuw Todo aan</div>
+              <!-- terug knop -->
               <button type="button" class="close" @click="showAddModal=false">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -120,14 +149,16 @@
                     class="form-control form-control"
                     placeholder="Name"
                     v-model="newTodo.name"
+                    autocomplete="off"
                   />
                 </div>
+                <!-- Voer toevoeg functie uit | @click betekent onclick -->
                 <div class="form-group">
                   <button
                     class="btn btn-into btn-block btn-lg bg-success text-light"
                     @click="showAddModal=false; addTodo(); clearMsg()"
                   >
-                    Add Todo
+                    Toevoegen
                   </button>
                 </div>
               </form>
@@ -146,7 +177,8 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <div class="modal-title">Edit Todo</div>
+              <div class="modal-title">Bewerken Te doen</div>
+              <!-- terug knop -->
               <button type="button" class="close" @click="showEditModal=false">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -157,24 +189,46 @@
                   <input
                     type="text"
                     name="name"
+                    autocomplete="off"
                     class="form-control form-control"
                     v-model="currentTodo.title"
                   />
                 </div>
                 <div class="form-group">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control form-control"
+                  <!-- check of input veld leeg is -->
+                  <p
+                    v-if="currentTodo.title === '' ? leegVeld ='Let op, er staat niks in het veld.'  : leegVeld = ''"
+                  >
+                    {{leegVeld}}
+                  </p>
+                  <!-- geeft waarschuwing dat het item wordt verwijderd -->
+                  <p
+                    style="color: #ff5964"
+                    v-if="currentTodo.title === '' ? warning ='Als u het zo laat wordt het item automatisch verwijderd!'  : warning = ''"
+                  >
+                    {{warning}}
+                  </p>
+                  <!-- <input
+                    type="checkbox"
+                    :id="currentTodo.id"
                     v-model="currentTodo.complete"
+                    :value="currentTodo.complete == 1 ? '0' : '1'"
+                  /> -->
+                  <input
+                    type="checkbox"
+                    :id="currentTodo.id"
+                    v-model="currentTodo.complete == 1 ? true : false"
                   />
+                  <label :for="currentTodo.id" class="todoCompleted">
+                    {{currentTodo.complete == 1 ? 'Gesloten' : 'Open'}}
+                  </label>
                 </div>
                 <div class="form-group">
                   <button
                     class="btn btn-into btn-block btn-lg bg-success text-light"
                     @click=" showEditModal=false; updateTodo(); clearMsg()"
                   >
-                    Update Todo
+                    Bijwerken
                   </button>
                 </div>
               </form>
@@ -193,7 +247,8 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <div class="modal-title">Delete Todo</div>
+              <div class="modal-title">Verwijderen Te doen</div>
+              <!-- terug knop -->
               <button
                 type="button"
                 class="close"
@@ -204,28 +259,31 @@
             </div>
             <div class="modal-body p-4">
               <h3 class="text-danger h5">
-                Are you sure you want to delete this todo?
+                Weet je het zeker dat je het item wilt verwijderen?
               </h3>
-              <p>You completed '{{currentTodo.title}}'</p>
+              <p style="font-style: italic">'{{currentTodo.title}}'</p>
               <hr />
+              <!-- knoppen om nog te kunnen bepalen -->
               <button
                 class="btn btn-danger btn-lg"
                 @click="showDeleteModal=false; deleteTodo(); clearMsg()"
               >
-                Yes
+                Ja
               </button>
               &nbsp;
               <button
-                class="btn btn-info btn-lg"
+                class="btn btn-primary btn-lg"
                 @click="showDeleteModal=false"
               >
-                No
+                Nee
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div id="app">
+</div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
