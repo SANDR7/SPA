@@ -1,7 +1,7 @@
-const JSONSource = "http://localhost/SPA/Vue-Todo/SPA/Vue-Todo/process.todo.php";
+// const JSONSource = "http://localhost/SPA/Vue-Todo/process.todo.php";
 // const JSONSource =
-// "http://localhost/School/Front/Spa//Vue-Todo/process.todo.php";
-// const JSONSource = "https://84231.ict-lab.nl/SPA/Vue/process.todo.php";
+//   "http://localhost/School/Front/Spa//Vue-Todo/process.todo.php";
+const JSONSource = "https://84231.ict-lab.nl/SPA/Vue/process.todo.php";
 
 var app = new Vue({
   el: "#app",
@@ -11,7 +11,6 @@ var app = new Vue({
     showAddModal: false,
     showEditModal: false,
     showDeleteModal: false,
-    extendedCost: 0,
     todos: [],
     newTodo: {
       name: "",
@@ -55,8 +54,8 @@ var app = new Vue({
       axios
         .post(`${JSONSource}?action=update`, formData)
         .then(function (response) {
-          if (app.currentTodo.title === "") {
-            return app.deleteTodo();
+          if (app.currentTodo.title  === "") {
+          return app.deleteTodo();
           }
           app.currentTodo = {};
           if (response.data.error) {

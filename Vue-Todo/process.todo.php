@@ -1,13 +1,13 @@
 <?php
-// $host = "127.0.0.1";
-// $username = "84231";
-// $password = "Abmp!019";
-// $database = "84231_Back1-2";
+$host = "127.0.0.1";
+$username = "84231";
+$password = "Abmp!019";
+$database = "84231_Back1-2";
 
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "spa";
+// $host = "localhost";
+// $username = "root";
+// $password = "";
+// $database = "spa";
 
 $db = new mysqli($host, $username, $password, $database);
 if ($db->connect_error) {

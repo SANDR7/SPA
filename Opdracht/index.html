@@ -12,15 +12,45 @@
       integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
       crossorigin="anonymous"
     ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <title>Ajax SPA | 84231</title>
-    <script src="./logic.js"></script>
+  </head>
+  <body style="margin: 3em">
+    <main id="Dist"></main>
     <script>
       $(document).ready(function () {
-        showTodos();
-        $("#addButton").click(function (e) {
+        $.getJSON("content.todo.php", function (data) {
+          //   var output = "<ul>";
+          var Output = `<div style="display: grid; grid-template-columns: repeat(4, 300px);">`;
+          for (var i in data) {
+            Output += `<div>`;
+            Output += `<b>${data[i].title}</b>`;
+            Output += `<div>`;
+            Output += `<span>Status:</span>`;
+            if (data[i].complete == 1) {
+              Output += `<div>gesloten</div>`;
+            } else {
+              Output += `<div>Open</div>`;
+            }
+            Output += `<a href="#" id="deleteTodo">Delete</a>`;
+            Output += `<button id="knop">edit</button>`;
+            Output += `</div>`;
+            Output += `</div>`;
+          }
+          Output += "</div>";
+          Output += `<input type="test" id="invoer">`;
+          $("#Dist").html(Output);
+        });
+        var invoer = $(`#invoer`).val();
+
+        $("#deleteTodo").click(function (e) { 
           e.preventDefault();
-          addTodo();
+          console.log(invoer);
         });
       });
     </script>
