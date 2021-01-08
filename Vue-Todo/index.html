@@ -28,7 +28,7 @@
         color: #51b65b;
       }
       input[type="checkbox"] {
-        appearance: none;
+        /* appearance: none; */
       }
       label {
         cursor: pointer;
@@ -75,7 +75,7 @@
                 <tr class="text-center bg-info text-light">
                   <th>ID</th>
                   <th class="text-left">Naam</th>
-                  <th>gecheckt</th>
+                  <th>Status</th>
                   <th>Bewerken</th>
                   <th>Verwijderen</th>
                 </tr>
@@ -208,11 +208,16 @@
                   >
                     {{warning}}
                   </p>
-                  <input
+                  <!-- <input
                     type="checkbox"
                     :id="currentTodo.id"
                     v-model="currentTodo.complete"
                     :value="currentTodo.complete == 1 ? '0' : '1'"
+                  /> -->
+                  <input
+                    type="checkbox"
+                    :id="currentTodo.id"
+                    v-model="currentTodo.complete == 1 ? true : false"
                   />
                   <label :for="currentTodo.id" class="todoCompleted">
                     {{currentTodo.complete == 1 ? 'Gesloten' : 'Open'}}
@@ -277,6 +282,8 @@
         </div>
       </div>
     </div>
+    <div id="app">
+</div>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
       integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="

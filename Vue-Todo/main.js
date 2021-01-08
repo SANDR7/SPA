@@ -22,6 +22,10 @@ var app = new Vue({
     this.getAllTodos();
   },
   methods: {
+    _onInputExtendedCost: function ($event) {
+      this.extendedCost = parseInt($event.target.value);
+      // Go update other inputs here
+    },
     getAllTodos() {
       axios.get(`${JSONSource}?action=read`).then(function (response) {
         if (response.data.error) {
