@@ -18,40 +18,13 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Ajax SPA | 84231</title>
-  </head>
-  <body style="margin: 3em">
-    <main id="Dist"></main>
+    <script src="./logic.js"></script>
     <script>
       $(document).ready(function () {
-        $.getJSON("content.todo.php", function (data) {
-          //   var output = "<ul>";
-          var Output = `<div style="display: grid; grid-template-columns: repeat(4, 300px);">`;
-          for (var i in data) {
-            Output += `<div>`;
-            Output += `<b>${data[i].title}</b>`;
-            Output += `<div>`;
-            Output += `<span>Status:</span>`;
-            if (data[i].complete == 1) {
-              Output += `<div>gesloten</div>`;
-            } else {
-              Output += `<div>Open</div>`;
-            }
-            Output += `<a href="#" id="deleteTodo">Delete</a>`;
-            Output += `<button id="knop">edit</button>`;
-            Output += `</div>`;
-            Output += `</div>`;
-          }
-          Output += "</div>";
-          Output += `<input type="test" id="invoer">`;
-          $("#Dist").html(Output);
-        });
-        var invoer = $(`#invoer`).val();
-
-        $("#deleteTodo").click(function (e) { 
-          e.preventDefault();
-          console.log(invoer);
-        });
+        showTodos();
       });
     </script>
   </head>
@@ -59,10 +32,11 @@
     body {
       background-image: url("https://www.kurkspecialist.nl/data/upload/Shop/images/kurk-achtergrond-19.jpg");
       background-repeat: no-repeat;
-      background-size: 100%;
+      background-repeat: repeat-y;
+      background-size: 100vw;
     }
     .col-3 {
-      background-color: #f5e85b ;
+      background-color: #f5e85b;
       height: 200px !important;
       box-shadow: 0 -2.9px 2.4px rgba(0, 0, 0, 0.108),
         0 -1.6px 3.8px rgba(0, 0, 0, 0.15), 0 4.9px 5.8px rgba(0, 0, 0, 0.171),
@@ -74,7 +48,8 @@
   <body style="margin: 3em">
     <div class="container d-flex">
       <input type="text" id="invoer" class="form-control w-75" />
-      <button id="addButton" class="btn btn-primary ml-2">Todo Toevoegen</button
+      <button id="addButton" class="btn btn-primary ml-2" onclick="addTodo()">
+        To-do Toevoegen</button
       ><br />
     </div>
     <div class="container">
