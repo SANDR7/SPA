@@ -36,13 +36,14 @@ if ($action == 'create') {
     // form credentials
     $name = $_POST['name'];
     // $finished = $_PORT['finished'];
-
+    
     $sql = $db->query("INSERT INTO todo (title, complete) VALUES('$name', 0)");
-    if ($sql) {
-        $result['message'] = "Todo succesvol toegevoegd!";
-    } else {
+    if ($sql && $name === "") {
         $result['error'] = true;
-        $result['message'] = "Fout bij Todo toevoegen";
+        $result['message'] = "Fout bij To-do toevoegen";
+  
+    } else {
+        $result['message'] = "To-do succesvol toegevoegd!";
     }
 }
 if ($action == 'update') {
@@ -55,10 +56,10 @@ if ($action == 'update') {
 
     $sql = $db->query("UPDATE `todo` SET title='$name' , complete=$finished WHERE `id`='$id' ");
     if ($sql) {
-        $result['message'] = "Todo succesvol bijgewerkt!";
+        $result['message'] = "To-do succesvol bijgewerkt!";
     } else {
         $result['error'] = true;
-        $result['message'] = "Fout bij Todo updaten";
+        $result['message'] = "Fout bij To-do updaten";
     }
 }
 if ($action == 'delete') {
@@ -66,10 +67,10 @@ if ($action == 'delete') {
     $id = $_POST['id'];
     $sql = $db->query("DELETE FROM todo WHERE id='$id'");
     if ($sql) {
-        $result['message'] = "Todo succesvol verwijderd!";
+        $result['message'] = "To-do succesvol verwijderd!";
     } else {
         $result['error'] = true;
-        $result['message'] = "Fout bij Todo verwijderen";
+        $result['message'] = "Fout bij To-do verwijderen";
     }
 }
 

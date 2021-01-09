@@ -38,9 +38,9 @@ var app = new Vue({
     addTodo() {
       const formData = app.toFormData(app.newTodo);
       axios
-        .post(`${JSONSource}?action=create`, formData)
-        .then(function (response) {
-          app.newTodo = { title: "", complete: "" };
+      .post(`${JSONSource}?action=create`, formData)
+      .then(function (response) {
+        app.newTodo = { title: "", complete: "" };
           if (response.data.error) {
             app.errorMsg = response.data.message;
           } else {
@@ -54,8 +54,8 @@ var app = new Vue({
       axios
         .post(`${JSONSource}?action=update`, formData)
         .then(function (response) {
-          if (app.currentTodo.title  === "") {
-          return app.deleteTodo();
+          if (app.currentTodo.title === "") {
+            return app.deleteTodo();
           }
           app.currentTodo = {};
           if (response.data.error) {
