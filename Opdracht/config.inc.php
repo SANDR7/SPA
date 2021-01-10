@@ -13,6 +13,11 @@ if (!$mysqli) {
     exit;
 }
 
+$result = array('error' => false);
+$action = '';
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+}
 //foutmelding zichtbaar maken
 // error_reporting(E_ALL);
 // ini_set('display_error', '1');

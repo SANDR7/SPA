@@ -25,7 +25,8 @@ const showTodos = () => {
       Output += `<div>`;
 
       Output += `
-             <div class="modal fade"
+
+             <div class="modal"
       id="modal${data[i].id}"
       tabindex="-1"
       role="dialog"
@@ -34,7 +35,7 @@ const showTodos = () => {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modal1-label">Mijn titel</h5>
+            <h5 class="modal-title" id="modal1-label">Bewerk To-do</h5>
             <button
               type="button"
               class="close"
@@ -44,20 +45,21 @@ const showTodos = () => {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+          <form action="" method="post">
           <div class='w-100 m-auto p-4 d-flex flex-column'>
-          <input type="text" value="${data[i].title}" />
-          <button id="addButton">Todo Bewerk</button><br />
+            <input type="text" value="${data[i].title}" id="invoerEdit"/>
           </div>
-          <div class="modal-footer">
-            <button
+            <div class="modal-footer">
+              <button
               type="button"
               class="btn btn-secondary"
               data-dismiss="modal"
-            >
+              >
               Sluiten
-            </button>
-            <button type="button" class="btn btn-primary">Opslaan</button>
-          </div>
+              </button>
+              <button type="button" class="btn btn-primary" onclick="editTodo(${data[i].id})">Opslaan</button>
+              </div>
+            </form>
         </div>
       </div>
     </div>
@@ -90,8 +92,32 @@ const addTodo = () => {
     }
   });
 }
+const editTodo = (id) => {
+  var invoerEdit = $(`#invoerEdit`).val();
+  if (invoerEdit === "") {
+    $(`#isFinished`).html(`<div class='alert alert-danger my-4'>Het veld is leeg</div>`);
+    return false;
+  }
+  $.ajax({
+    url: `Update/edit.todo.php`,
+    method: `POST`,
+    data: { invoer: invoerEdit, id_todo: id },
+  }).done(function (data) {
+    if (data) {
+      $(`#isFinished`).html(`<div class='alert alert-success my-4'>Gelukt!</div>`);
+      closeEditModel();
+      showTodos();
+    }
+    else {
+      $(`#isFinished`).html(`<div class='alert alert-danger my-4'>Er ging iets fout!</div>`);
+    }
+  });
+}
 const openEditModel = () => {
   $('.model').show();
+}
+const closeEditModel = () => {
+  $(".modal-backdrop").remove();
 }
 
 // const deleteTodo = () => {
